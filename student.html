@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Student Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            display: flex; 
+            justify-content: space-around; 
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .form-container, .table-container {
+            width: 48%; 
+        }
+
+        
+        textarea {
+            resize: vertical; 
+            min-height: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container bg-white p-4 rounded">
+        <h2 class="text-center mb-4">Student Registration Form</h2>
+        <form id="studentForm">
+            <div class="mb-3">
+                <label for="studentName" class="form-label">Student Name:</label>
+                <input type="text" class="form-control" id="studentName" name="studentName" required>
+            </div>
+            <div class="mb-3">
+                <label for="studentPhone" class="form-label">Student Phone:</label>
+                <input type="tel" class="form-control" id="studentPhone" name="studentPhone" required>
+            </div>
+            <div class="mb-3">
+                <label for="studentEmail" class="form-label">Student Email:</label>
+                <input type="email" class="form-control" id="studentEmail" name="studentEmail" required>
+            </div>
+            <div class="mb-3">
+                <label for="studentAddress" class="form-label">Student Address:</label>
+                <textarea class="form-control" id="studentAddress" name="studentAddress" required></textarea>
+            </div>
+            <div class="d-flex justify-content-around mt-4">
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-danger" id="resetButton">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-container bg-white p-4 rounded">
+        <h2 class="text-center mb-4">Registered Students</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="studentTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const studentForm = document.getElementById('studentForm');
+            const studentTableBody = document.querySelector('#studentTable tbody');
+            const resetButton = document.getElementById('resetButton');
+
+            const addStudentToTable = (name, phone, email, address) => {
+                const row = studentTableBody.insertRow();
+                row.insertCell(0).textContent = name;
+                row.insertCell(1).textContent = phone;
+                row.insertCell(2).textContent = email;
+                row.insertCell(3).textContent = address;
+            };
+
+            studentForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const studentName = document.getElementById('studentName').value;
+                const studentPhone = document.getElementById('studentPhone').value;
+                const studentEmail = document.getElementById('studentEmail').value;
+                const studentAddress = document.getElementById('studentAddress').value;
+
+                addStudentToTable(studentName, studentPhone, studentEmail, studentAddress);
+            });
+
+            resetButton.addEventListener('click', () => {
+                studentForm.reset();
+            });
+        });
+    </script>
+
+</body>
+</html>
